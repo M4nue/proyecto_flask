@@ -3,7 +3,32 @@
 
 {% block contenido %}
 
-
-
-
+{% if nombre %}
+    <div>
+        <tr>
+            <td>{{ nombre }}</td>
+            <td>{{ precio_compra }}</td>
+            <td>{{ precio_venta }}</td>
+        </tr>
+    </div>
+    {% else %}
+        <h2>Cajas Disponibles</h2>
+        <div>
+            <table id="tabla">
+                <tr>
+                    <th><h5> Nombre</h5></th>
+                    <th><h5> Precio de compra</h5></th>
+                    <th><h5> Precio de venta</h5></th>
+                </tr>
+                {% for caja in cajas %}
+                <tr>
+                    <td><h5>{{ caja }}</h5></td>
+                    <td><h5>{{ precio_compra[loop.index0] }}</h5></td>
+                    <td><h5>{{ precio_venta[loop.index0] }}</h5></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
 {% endblock %}
+
