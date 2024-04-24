@@ -14,18 +14,39 @@ def buscador():
 @app.route('/lista', methods=["post"])
 def lista():
     nombre = request.form.get("Caja")
-    coincidencias_nombres_caja = []
+    descoincidencias_nombres_caja = []
+    precio_compra_descoincidencias = []
+    precio_venta_descoincidencias = []
+    coincidencias =[]
     precio_compra = []
     precio_venta = []
 
     for caja in archivo_json:
         if nombre == caja["nombre"]:
             return render_template("lista.html", nombre=caja["nombre"], precio_compra=caja["precio_compra"], precio_venta=caja["sale_price_text"])
+        
+        elif nombre != "":
+            
+            
+            if caja["nombre"].count(nombre) != 0:
+                coincidencias.append(caja["nombre"])
+                precio_compra.append(caja["precio_compra"])
+                precio_venta.append(caja["sale_price_text"])
+
+                #return render_template("lista.html", nombre=caja["nombre"], precio_compra=caja["precio_compra"], precio_venta=caja["sale_price_text"]) 
+            else:
+                descoincidencias_nombres_caja.append(caja["nombre"])
+                precio_compra_descoincidencias.append(caja["precio_compra"])
+                precio_venta_descoincidencias.append(caja["sale_price_text"])
+
         else:
-            coincidencias_nombres_caja.append(caja["nombre"])
-            precio_compra.append(caja["precio_compra"])
-            precio_venta.append(caja["sale_price_text"])
-    return render_template("lista.html", cajas=coincidencias_nombres_caja, precio_compra=precio_compra,precio_venta=precio_venta) 
+            descoincidencias_nombres_caja.append(caja["nombre"])
+            precio_compra_descoincidencias.append(caja["precio_compra"])
+            precio_venta_descoincidencias.append(caja["sale_price_text"])
 
-
+    if len(coincidencias)==0:
+        return render_template("lista.html", cajas=descoincidencias_nombres_caja, precio_compra=precio_venta_descoincidencias, precio_venta=precio_venta_descoincidencias) 
+    else:
+        return render_template("lista.html", cajas=coincidencias,precio_compra=precio_compra,precio_venta=precio_venta) 
+        
 app.run("0.0.0.0",5000,debug=True)
