@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, abort
 from static import funciones
 archivo_json = funciones.cargar_json()
 app = Flask(__name__)
@@ -48,5 +48,14 @@ def lista():
         return render_template("lista.html", cajas=descoincidencias_nombres_caja, precio_compra=precio_venta_descoincidencias, precio_venta=precio_venta_descoincidencias) 
     else:
         return render_template("lista.html", cajas=coincidencias,precio_compra=precio_compra,precio_venta=precio_venta) 
-    
+
+@app.route('/detalle/<nombre>')
+def cajanombre(nombre):
+    for caja in archivo_json:
+        if caja["nombre"] == nombre:
+            return render_template("detalle.html", nombre=nombre)
+    return abort(404)
+
+
+
 app.run("0.0.0.0",5000,debug=True)
