@@ -5,11 +5,20 @@
 
 {% if nombre %}
     <div>
-        <tr>
-            <td>{{ nombre }}</td>
-            <td>{{ precio_compra }}</td>
-            <td>{{ precio_venta }}</td>
-        </tr>
+        <table id="tabla">
+            <tr>
+                <th><h5> Nombre</h5></th>
+                <th><h5> Precio de compra</h5></th>
+                <th><h5> Precio de venta</h5></th>
+            </tr>
+            
+            <tr>
+                <td><h5>{{ nombre }}</h5></td>
+                <td><h5>{{ precio_compra }}</h5></td>
+                <td><h5>{{ precio_venta }}</h5></td>
+            </tr>
+            
+        </table>
     </div>
     {% else %}
         <h2>Cajas Disponibles</h2>
