@@ -49,5 +49,4 @@ def lista():
     else:
         return render_template("lista.html", cajas=coincidencias,precio_compra=precio_compra,precio_venta=precio_venta) 
     
-
 app.run("0.0.0.0",5000,debug=True)
