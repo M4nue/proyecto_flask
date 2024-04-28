@@ -117,3 +117,13 @@ footer a img {
 #tabla td {
   text-align: center;
 }
+
+
+#detalles1{
+  display: flex;
+  justify-content: center;
+}
+
+#detalles2{
+  width: 50%;
+}
